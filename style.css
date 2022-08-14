@@ -1,97 +1,187 @@
 :root {
-  font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
-  font-size: 16px;
-  line-height: 24px;
-  font-weight: 400;
+  --dark-cyan: hsl(185, 75%, 39%);
+  --desaturated-blue: hsl(229, 23%, 23%);
+  --grayish-blue: hsl(227, 10%, 46%);
+  --dark-gray: hsl(0, 0%, 59%);
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  --fs-name: 1.125em;
+  --font-family: "Kumbh Sans", sans-serif;
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-text-size-adjust: 100%;
+  --size-50: 0.25em;
+  --size-100: 0.5em;
+  --size-200: 1em;
+  --size-300: 1.5em;
+  --size-400: 2em;
+  --size-500: 2.5em;
+  --size-600: 3em;
+  --size-700: 3.5em;
+  --size-800: 5em;
+  --size-900: 5.5em;
+  --size-xl: 7em;
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
+/* Box sizing rules */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
-body {
+/* Remove default margin */
+*{
   margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
+  padding:0;
+  font-family: var(--font-family);
+}
+
+/* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
+ul[role="list"],
+ol[role="list"] {
+  list-style: none;
+}
+
+/* Set core root defaults */
+html:focus-within {
+  scroll-behavior: smooth;
+}
+
+/* Set core body defaults */
+body {
   min-height: 100vh;
+  text-rendering: optimizeSpeed;
+  line-height: 1.5;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+/* A elements that don't have a class get default styles */
+a:not([class]) {
+  text-decoration-skip-ink: auto;
 }
 
-#app {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+/* Make images easier to work with */
+img,
+picture {
+  max-width: 100%;
+  display: block;
+}
+
+/* Inherit fonts for inputs and buttons */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+/* Remove all animations, transitions and smooth scroll for people that prefer not to see them */
+@media (prefers-reduced-motion: reduce) {
+  html:focus-within {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+/* general styling */
+body {
+  background-color: var(--dark-cyan);
+}
+
+main {
+  min-height: 100vh;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background-color:var(--dark-cyan);
+  isolation: isolate;
+}
+main::before, main::after {
+  content: "";
+  background-size: contain;
+  width: 100%;
+  height: 100%;
+  background-repeat: no-repeat;
+  position: absolute;
+}
+main::before {
+  background-image: url("../images/bg-pattern-top.svg");
+  left: -50%;
+  top: -20%;
+}
+main::after {
+  background-image: url("../images/bg-pattern-bottom.svg");
+  bottom: -50%;
+  right: -40%;
+}
+@media (min-width: 768px) {
+  main::before {
+    background-image: url("../images/bg-pattern-top.svg");
+    top: -40%;
+    left: -5%;
+  }
+  main::after {
+    background-image: url("../images/bg-pattern-bottom.svg");
+    bottom: -50%;
+    right: -60%;
+  }
+}
+h1,h2,h3,h4,h5,h6 {
+  color: var(--desaturated-blue);
+  font-size: var(--fs-name);
+  font-weight: 700;
+}
+
+p, span {
+  color: var(--grayish-blue);
+  padding-top: var(--size-50);
+}
+/* component styles */
+.card{
+  background-color: white;
+  border-radius: var(--size-200);
+  overflow: hidden;
+  z-index: 100;
+  margin: var(--size-300)
+}
+
+.content{
+  position: relative;
   text-align: center;
+  border-bottom: 1px solid lightgray;
+  padding-top: var(--size-800);
+  padding-bottom: var(--size-300);
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vanilla:hover {
-  filter: drop-shadow(0 0 2em #f7df1eaa);
+.profile{
+  position: absolute;
+  border: 6px solid white;
+  border-radius: 50%;
+  top: -30%;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
-.card {
-  padding: 2em;
+.tag {
+  font-weight: normal;
+  padding-left: var(--size-50);
 }
 
-.read-the-docs {
-  color: #888;
+footer {
+  text-align: center;
+  display: flex;
+  justify-content: space-around;
+  padding: var(--size-300);
 }
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
+footer p {
+  font-size: 12px;
+  letter-spacing: 0.1em;
   font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
 }
